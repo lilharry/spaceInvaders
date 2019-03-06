@@ -2,7 +2,7 @@ public class Alien{
  private int x,y;
  private int health;
  private int shouldBeAtX, shouldBeAtY;
- private boolean moving;
+ 
   
  public Alien(int x, int y, int shouldBeAtX, int shouldBeAtY, int health){
    this.x = x;
@@ -10,7 +10,8 @@ public class Alien{
    this.shouldBeAtX = shouldBeAtX;
    this.shouldBeAtY = shouldBeAtY;
    this.health = health;
-   moving = false;
+   
+   
  }
  
  public int getX(){
@@ -55,8 +56,12 @@ public class Alien{
    if (y > shouldBeAtY){
      y-= speed;
    }   
+   if (animate){
+     animate = false;
+   }else{
+     animate = true;
+   }
  }
- 
  
  public void drop(){
    y+=50;

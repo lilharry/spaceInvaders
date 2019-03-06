@@ -10,11 +10,15 @@ int currentCount;
 ArrayList<Alien> aliens = new ArrayList<Alien>();
 ArrayList<Alien> dead = new ArrayList<Alien>();
 
+//alien images
+PImage a1,a2,b1,b2,c1,c2;
+boolean animate;
 
 boolean left, right, shoot;
 
 int shipX, shipY;
 
+PImage ship;
 int shipL, shipW;
 int alienL, alienW;
 int level;
@@ -35,11 +39,20 @@ void setup() {
 
   aliensPerRow = 10;
   shipMoveSpeed = 10;
+  ship = loadImage("img/spaceship.png");
 
   power = 1;
   level = 1;
   currentCount =0;
 
+  //alien images
+  a1 = loadImage("img/Alien1a.png");
+  a2 = loadImage("img/Alien1b.png");
+  b1 = loadImage("img/Alien2a.png");
+  b2 = loadImage("img/Alien2b.png");
+  c1 = loadImage("img/Alien3a.png");
+  c2 = loadImage("img/Alien3b.png");
+  animate = false;
 }
 
 void draw() {  
@@ -48,7 +61,7 @@ void draw() {
     generateAliens();
   }
 
-  rect(shipX, shipY, shipL, shipW);
+  image(ship,shipX, shipY, shipL, shipW);
   if (left && shipX > 0) {
     shipX-=shipMoveSpeed;
   }
@@ -57,12 +70,14 @@ void draw() {
     shipX+=shipMoveSpeed;
   }
   
-  if (shoot) {
-    if (frameCount - currentCount > 40){
+  if (frameCount - currentCount > 40){
       currentCount = frameCount;
-      bullets.add(new Bullet(shipX + shipL/2, shipY, power));
-    }
-
+      if (shoot) {
+    
+        bullets.add(new Bullet(shipX + shipL/2, shipY, power));
+      
+      }
+      animate = !animate;
   }
   
   updateAliens();
@@ -80,14 +95,19 @@ void generateAliens() {
   }
 }
 
-
+  
 void updateAliens() {
   for (Alien a : aliens){
-    rect(a.getX(),a.getY(),alienL,alienW);
+    if (animate){ 
+      image(a2,a.getX(),a.getY(),alienL,alienW);
+    }else{
+      image(a1,a.getX(),a.getY(),alienL,alienW);
+    }
     a.move(2);
     if (a.getHealth() <= 0){
       dead.add(a);
     }
+    
   }
   aliens.removeAll(dead);
   dead.clear();
