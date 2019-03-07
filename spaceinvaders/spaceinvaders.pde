@@ -11,6 +11,7 @@ ArrayList<Alien> aliens = new ArrayList<Alien>();
 ArrayList<Alien> dead = new ArrayList<Alien>();
 
 //alien images
+//add coments
 PImage a1,a2,b1,b2,c1,c2;
 boolean animate;
 
