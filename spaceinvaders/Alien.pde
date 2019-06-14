@@ -2,14 +2,15 @@ public class Alien{
  private int x,y;
  private int health;
  private int shouldBeAtX, shouldBeAtY;
- 
+ private boolean startAni;
   
- public Alien(int x, int y, int shouldBeAtX, int shouldBeAtY, int health){
+ public Alien(int x, int y, int shouldBeAtX, int shouldBeAtY, int health, boolean startAni){
    this.x = x;
    this.y = y;
    this.shouldBeAtX = shouldBeAtX;
    this.shouldBeAtY = shouldBeAtY;
    this.health = health;
+   this.startAni = startAni;
    
    
  }
@@ -34,6 +35,14 @@ public class Alien{
    this.y = y;
  }
  
+ public boolean getStartAni(){
+   return startAni;
+ }
+ 
+ public void toggleStartAni(){
+   startAni = !startAni;
+ }
+ 
  public void takeDamage(int power){
    health-=power;
  }
@@ -56,11 +65,7 @@ public class Alien{
    if (y > shouldBeAtY){
      y-= speed;
    }   
-   if (animate){
-     animate = false;
-   }else{
-     animate = true;
-   }
+
  }
  
  public void drop(){

@@ -88,9 +88,11 @@ void draw() {
 
 void generateAliens() {
   int alienS = 65;
+  boolean startAni = true;
   for (int i = 0; i < 3; i++) {
     for (int j = 0; j < 10; j++) { 
-      aliens.add(new Alien(-50 + -alienS*j, 10 + alienS*i, width/aliensPerRow + alienS*(aliensPerRow-j) - alienS, 10 + alienS*i, level));
+      startAni = !startAni;
+      aliens.add(new Alien(-50 + -alienS*j, 10 + alienS*i, width/aliensPerRow + alienS*(aliensPerRow-j) - alienS, 10 + alienS*i, level, startAni));
       System.out.printf("x = %d\tshouldBe = %d\ny=%d\tshouldBe=%d\n",-50 + -alienS*j,10 + alienS*i, width/10 + alienS*(j),10 + alienS*i, level);
     }
   }
